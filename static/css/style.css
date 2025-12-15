@@ -300,7 +300,10 @@ main {
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Aligns content to top */
+    padding-top: 4rem;
+    /* Adds necessary spacing from navbar */
     padding-right: 2rem;
 }
 
