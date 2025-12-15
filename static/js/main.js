@@ -209,18 +209,18 @@ function initThreeJS() {
             const context = canvas.getContext('2d');
             canvas.width = 256;
             canvas.height = 64;
-            context.font = "Bold 24px Arial";
+            context.font = "Bold 22px Arial"; /* Reduced font size from 24px */
             context.fillStyle = "rgba(255,255,255,1.0)";
             context.textAlign = "center";
             context.shadowColor = "rgba(0,0,0,0.8)";
-            context.shadowBlur = 4;
-            context.fillText(dest.name, 128, 32);
+            context.shadowBlur = 3;
+            context.fillText(dest.name, 128, 38); /* Adjusted vertical position */
 
             const texture = new THREE.CanvasTexture(canvas);
-            const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+            const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: true }); /* Physics/Occlusion enabled */
             const sprite = new THREE.Sprite(spriteMat);
-            sprite.position.copy(pos.clone().multiplyScalar(1.1)); // Reduced offset to be closer
-            sprite.scale.set(3, 0.75, 1); // Adjusted scale
+            sprite.position.copy(pos.clone().multiplyScalar(1.08)); /* Closer to surface */
+            sprite.scale.set(2, 0.5, 1); /* Smaller scale */
             globeGroup.add(sprite);
 
         });
