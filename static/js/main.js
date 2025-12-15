@@ -149,15 +149,6 @@ function initThreeJS() {
                 detail: "Service to Toronto, Vancouver, and other major Canadian cities."
             },
             {
-                name: "Canada (Direct)",
-                lat: 56.0,
-                lon: -106.0,
-                services: "Air Freight, Sea Freight",
-                routing: "LHE → YYZ (Direct)",
-                transit: "3-5 business days",
-                detail: "Direct cargo flights available to major Canadian hubs."
-            },
-            {
                 name: "Qatar",
                 lat: 25.3,
                 lon: 51.5,
@@ -167,6 +158,20 @@ function initThreeJS() {
                 detail: "Specialized handling for Qatar with direct flights from Karachi."
             }
         ];
+
+        // ZOOM IN/OUT Logic
+        function onMouseWheel(e) {
+            e.preventDefault();
+            const zoomSpeed = 0.5;
+            const minZoom = 10;
+            const maxZoom = 25;
+
+            camera.position.z += e.deltaY * 0.005 * zoomSpeed;
+
+            // Clamp zoom
+            if (camera.position.z < minZoom) camera.position.z = minZoom;
+            if (camera.position.z > maxZoom) camera.position.z = maxZoom;
+        }
 
         const markers = [];
         const markerGeo = new THREE.SphereGeometry(0.15, 16, 16);
@@ -396,8 +401,8 @@ function initThreeJS() {
             isDragging = false;
         }
 
-        canvasContainer.addEventListener('touchstart', onTouchStart, { passive: false });
-        canvasContainer.addEventListener('touchmove', onTouchMove, { passive: false });
+        canvasContainer.addEventListener('touchend', onTouchEnd);
+        canvasContainer.addEventListener('wheel', onMouseWheel, { passive: false });
         canvasContainer.addEventListener('touchend', onTouchEnd);
 
         // RESET BUTTON REMOVED PER REQ
