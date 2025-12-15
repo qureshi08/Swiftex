@@ -296,8 +296,8 @@ main {
     height: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    align-items: flex-start;
-    /* changed from center to allow custom top positioning */
+    align-items: center;
+    /* Center align items vertically */
 }
 
 .hero-text-side {
@@ -305,10 +305,9 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Center text relative to the specific height area defined below or by content */
     padding-right: 2rem;
-    height: 60%;
-    /* Match visual side height roughly for centering alignment */
+    height: 100%;
+    /* Allow full height */
 }
 
 .hero-visual-side {
@@ -316,15 +315,15 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60%;
-    /* Limit height to push content up effectively */
+    height: 100%;
+    /* Allow full height for bigger globe */
 }
 
 #hero-canvas-container {
-    width: 100%;
-    /* Increased size */
-    height: 85%;
-    /* Increased size */
+    width: 90%;
+    /* Slightly reduced */
+    height: 75%;
+    /* Slightly reduced */
 }
 
 /* ... existing tooltip styles ... */
