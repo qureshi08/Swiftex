@@ -283,10 +283,10 @@ main {
     height: 100vh;
     min-height: 520px;
     display: flex;
-    align-items: flex-start;
-    /* Start content from top */
-    padding: 130px 5% 0;
-    /* Push down from top */
+    align-items: center;
+    /* Center vertically */
+    padding: 0 5%;
+    /* Reset padding */
     background: linear-gradient(180deg, #F2F4F7 0%, #FFFFFF 100%);
 }
 
@@ -321,11 +321,13 @@ main {
 }
 
 #hero-canvas-container {
-    width: 70%;
-    /* Reduced from 80% */
-    height: 70%;
-    /* Reduced globe size */
+    width: 100%;
+    /* Increased size */
+    height: 85%;
+    /* Increased size */
 }
+
+/* ... existing tooltip styles ... */
 
 .globe-tooltip {
     position: absolute;
@@ -369,10 +371,10 @@ main {
 }
 
 .hero-content h1 {
-    font-size: 1.8rem;
-    /* Reduced from 2.35rem */
-    line-height: 1.25;
-    margin-bottom: 0.9rem;
+    font-size: 2.8rem;
+    /* Increased significantly */
+    line-height: 1.2;
+    margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
