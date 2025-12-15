@@ -312,8 +312,10 @@ main {
 }
 
 #hero-canvas-container {
-    width: 100%;
-    height: 75%;
+    width: 80%;
+    /* Reduced from 100% */
+    height: 65%;
+    /* Reduced from 75% */
 }
 
 .globe-tooltip {
