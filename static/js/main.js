@@ -351,6 +351,35 @@ function initThreeJS() {
         canvasContainer.addEventListener('mousemove', onMouseMove);
         canvasContainer.addEventListener('click', onClick);
 
+        // --- Mobile Touch Support ---
+        function onTouchStart(e) {
+            if (e.touches.length === 1) {
+                isDragging = true;
+                dragStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+        }
+
+        function onTouchMove(e) {
+            if (isDragging && e.touches.length === 1) {
+                const deltaMove = {
+                    x: e.touches[0].clientX - previousMousePosition.x,
+                    y: e.touches[0].clientY - previousMousePosition.y
+                };
+                targetRotation.y += deltaMove.x * 0.005;
+                targetRotation.x += deltaMove.y * 0.005;
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+        }
+
+        function onTouchEnd() {
+            isDragging = false;
+        }
+
+        canvasContainer.addEventListener('touchstart', onTouchStart, { passive: false });
+        canvasContainer.addEventListener('touchmove', onTouchMove, { passive: false });
+        canvasContainer.addEventListener('touchend', onTouchEnd);
+
         // RESET BUTTON REMOVED PER REQ
         // MOUSE WHEEL ZOOM REMOVED PER REQ
 
