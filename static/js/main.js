@@ -162,7 +162,7 @@ function initThreeJS() {
         // ZOOM IN/OUT Logic
         function onMouseWheel(e) {
             e.preventDefault();
-            const zoomSpeed = 0.5;
+            const zoomSpeed = 1.2;
             const minZoom = 10;
             const maxZoom = 25;
 
