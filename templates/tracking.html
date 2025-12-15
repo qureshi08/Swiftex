@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}Track Your Shipment - International Cargo{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
+    <h1 style="text-align: center; margin-bottom: 1rem;">Track Your Shipment</h1>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Enter your tracking ID and select your
+        courier to track your shipment</p>
+
+    <div class="tracking-card"
+        style="background: #FFFFFF; padding: 3rem; border-radius: 12px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
+
+        <div style="margin-bottom: 1.5rem;">
+            <label for="tracking-id"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-main);">Tracking
+                ID</label>
+            <input type="text" id="tracking-id" placeholder="Enter your tracking number"
+                style="width: 100%; padding: 1rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 6px;">
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <label for="courier-select"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-main);">Select
+                Courier</label>
+            <select id="courier-select"
+                style="width: 100%; padding: 1rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 6px; background: white; cursor: pointer;">
+                <option value="">-- Select Courier --</option>
+                <option value="dhl">DHL Express</option>
+                <option value="ups">UPS</option>
+                <option value="fedex">FedEx</option>
+            </select>
+        </div>
+
+        <button onclick="trackShipment()" class="btn-primary"
+            style="width: 100%; padding: 1rem; font-size: 1.1rem;">Track Shipment</button>
+
+        <!-- Info Note -->
+        <div
+            style="margin-top: 2rem; padding: 1rem; background: var(--bg-light); border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <p style="font-size: 0.9rem; color: var(--text-body); margin: 0;">
+                <strong>Note:</strong> For shipments currently being handled in UK/Dubai, please contact our support
+                team for updates.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function trackShipment() {
+        const trackingId = document.getElementById('tracking-id').value.trim();
+        const courier = document.getElementById('courier-select').value;
+
+        if (!trackingId) {
+            alert("Please enter a tracking ID");
+            return;
+        }
+
+        if (!courier) {
+            alert("Please select a courier");
+            return;
+        }
+
+        // Redirect to official courier tracking pages with auto-filled tracking ID
+        let trackingUrl = '';
+
+        switch (courier) {
+            case 'dhl':
+                // DHL uses 'tracking-id' parameter
+                trackingUrl = `https://www.dhl.com/pk-en/home/tracking/tracking-express.html?submit=1&tracking-id=${encodeURIComponent(trackingId)}`;
+                break;
+            case 'ups':
+                // UPS uses 'tracknum' parameter
+                trackingUrl = `https://www.ups.com/track?loc=en_US&tracknum=${encodeURIComponent(trackingId)}&requester=ST/trackdetails`;
+                break;
+            case 'fedex':
+                // FedEx uses 'trknbr' parameter
+                trackingUrl = `https://www.fedex.com/fedextrack/?trknbr=${encodeURIComponent(trackingId)}&cntry_code=pk`;
+                break;
+        }
+
+        if (trackingUrl) {
+            // Open in new tab with tracking ID pre-filled
+            window.open(trackingUrl, '_blank');
+        }
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('tracking-id').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            trackShipment();
+        }
+    });
+</script>
+{% endblock %}

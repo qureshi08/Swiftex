@@ -1,0 +1,84 @@
+{
+    "PK8821": {
+        "courier": "DHL Express",
+        "status": "Delivered",
+        "origin": "Lahore, Pakistan",
+        "destination": "London, UK",
+        "current_location": "London, UK",
+        "history": [
+            {
+                "date": "2025-05-10 09:30",
+                "status": "Delivered",
+                "location": "London, UK"
+            },
+            {
+                "date": "2025-05-10 07:15",
+                "status": "Out for Delivery",
+                "location": "London Heathrow"
+            },
+            {
+                "date": "2025-05-09 18:00",
+                "status": "Arrived at Sort Facility",
+                "location": "London Heathrow"
+            },
+            {
+                "date": "2025-05-09 05:00",
+                "status": "Departed Facility",
+                "location": "Dubai Hub, UAE"
+            },
+            {
+                "date": "2025-05-08 20:00",
+                "status": "Arrived at Hub",
+                "location": "Dubai Hub, UAE"
+            },
+            {
+                "date": "2025-05-08 14:00",
+                "status": "Picked Up",
+                "location": "Lahore, PK"
+            }
+        ]
+    },
+    "US5592": {
+        "courier": "FedEx International",
+        "status": "In Transit",
+        "origin": "Karachi, Pakistan",
+        "destination": "New York, USA",
+        "current_location": "Paris CDG, France",
+        "history": [
+            {
+                "date": "2025-05-11 12:45",
+                "status": "In Transit",
+                "location": "Paris CDG, France"
+            },
+            {
+                "date": "2025-05-11 04:30",
+                "status": "Departed Facility",
+                "location": "Dubai, UAE"
+            },
+            {
+                "date": "2025-05-10 15:20",
+                "status": "Processed at Facility",
+                "location": "Dubai, UAE"
+            },
+            {
+                "date": "2025-05-10 09:00",
+                "status": "Shipment Picked Up",
+                "location": "Karachi, PK"
+            }
+        ]
+    },
+    "AE1001": {
+        "courier": "UPS Worldwide",
+        "status": "Pending Pickup",
+        "origin": "Islamabad, Pakistan",
+        "destination": "Dubai, UAE",
+        "current_location": "Islamabad, PK",
+        "history": [
+            {
+                "date": "2025-05-12 10:00",
+                "status": "Label Created",
+                "location": "Islamabad, PK"
+            }
+        ]
+    }
+}

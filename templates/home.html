@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}International Cargo & Courier Services from Pakistan{% endblock %}
+
+{% block content %}
+<section id="hero">
+    <div class="hero-split-container">
+        <!-- Left Side: Text Content -->
+        <div class="hero-text-side">
+            <div class="hero-content">
+                <h1>Fast & Reliable<br>International Cargo</h1>
+                <p>Trusted logistics partner for shipping from Pakistan to UK, USA, UAE, Canada, and beyond.
+                    Professional cargo services with real-time tracking and competitive rates.</p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('contact') }}" class="btn-primary">Get a Quote</a>
+                    <a href="{{ url_for('tracking') }}" class="btn-primary btn-outline">Track Shipment</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: 3D Visualization -->
+        <div class="hero-visual-side">
+            <div id="hero-canvas-container">
+                <div id="globe-tooltip" class="globe-tooltip">
+                    <h4 id="tooltip-country">Country</h4>
+                    <p id="tooltip-desc">Service details</p>
+                    <div class="tooltip-cta">Click for details</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick CTA Section Removed -->
+
+<!-- Destination Detail Modal -->
+<div id="destinationModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modal-country-name" style="color: var(--primary-color); margin-bottom: 0.85rem;">Country Name</h2>
+
+        <div style="margin-bottom: 1.25rem;">
+            <h4
+                style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem;">
+                Services Offered</h4>
+            <p id="modal-services" style="color: var(--text-body); line-height: 1.6; font-size: 0.9rem;">Air Freight,
+                Express Cargo,
+                Door-to-Door Delivery</p>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+            <h4
+                style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem;">
+                Typical Routing</h4>
+            <p id="modal-routing"
+                style="color: var(--text-body); font-family: 'Courier New', monospace; background: var(--bg-light); padding: 0.45rem; border-radius: 4px; font-size: 0.85rem;">
+                LHE → DXB → Destination</p>
+        </div>
+
+        <div style="margin-bottom: 0.85rem;">
+            <h4
+                style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem;">
+                Transit Time</h4>
+            <p id="modal-transit" style="color: var(--text-body); font-size: 0.9rem;">3-5 business days</p>
+        </div>
+
+        <div style="margin-top: 1.75rem; display: flex; gap: 0.85rem;">
+            <a href="{{ url_for('contact') }}" class="btn-primary" style="flex: 1; text-align: center;">Get a Quote</a>
+            <a href="{{ url_for('tracking') }}" class="btn-primary"
+                style="flex: 1; text-align: center; background: transparent; color: var(--primary-color) !important; border: 1px solid var(--primary-color); box-shadow: none;">Track
+                Shipment</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // JS for modal closing
+    const modal = document.getElementById("destinationModal");
+    const closeBtn = document.getElementsByClassName("close-modal")[0];
+
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends "layout.html" %}
+
+{% block title %}Our Destinations - International Cargo & Courier{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 5rem 2rem;">
+    <h1 style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">Our Destinations</h1>
+    <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto 4rem; font-size: 1.1rem;">
+        We deliver to major destinations worldwide with reliable service and competitive rates
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <!-- United Kingdom -->
+        <div class="destination-card" style="cursor: pointer;" onclick="openDestinationModal('UK')">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 3.5rem;">🇬🇧</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.6rem;">United Kingdom</h3>
+                    <p style="margin: 0; color: var(--accent-color); font-size: 0.9rem;">Primary European Hub</p>
+                </div>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-body);">Daily flights with comprehensive customs support.
+                Our primary gateway to Europe with 3-5 day transit times.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Air
+                    Freight</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Express</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Door-to-Door</span>
+            </div>
+        </div>
+
+        <!-- United States -->
+        <div class="destination-card" style="cursor: pointer;" onclick="openDestinationModal('USA')">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 3.5rem;">🇺🇸</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.6rem;">United States</h3>
+                    <p style="margin: 0; color: var(--accent-color); font-size: 0.9rem;">Major US Cities</p>
+                </div>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-body);">Direct and connecting flights to New York, Los
+                Angeles, Chicago, and more. Full customs clearance support included.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Air
+                    Freight</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Sea
+                    Freight</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Express</span>
+            </div>
+        </div>
+
+        <!-- UAE / Dubai -->
+        <div class="destination-card" style="cursor: pointer;" onclick="openDestinationModal('UAE')">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 3.5rem;">🇦🇪</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.6rem;">UAE / Dubai</h3>
+                    <p style="margin: 0; color: var(--accent-color); font-size: 0.9rem;">Fastest Route</p>
+                </div>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-body);">Next-day delivery options available. Direct flights
+                with local warehousing facilities for your convenience.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Express</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Next-Day</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Warehousing</span>
+            </div>
+        </div>
+
+        <!-- Saudi Arabia -->
+        <div class="destination-card" style="cursor: pointer;" onclick="openDestinationModal('KSA')">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 3.5rem;">🇸🇦</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.6rem;">Saudi Arabia</h3>
+                    <p style="margin: 0; color: var(--accent-color); font-size: 0.9rem;">Riyadh & Jeddah</p>
+                </div>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-body);">Reliable service to Riyadh, Jeddah, and other major
+                Saudi cities with 2-4 day transit times.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Air
+                    Freight</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Door-to-Door</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Commercial</span>
+            </div>
+        </div>
+
+        <!-- Canada -->
+        <div class="destination-card" style="cursor: pointer;" onclick="openDestinationModal('Canada')">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 3.5rem;">🇨🇦</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.6rem;">Canada</h3>
+                    <p style="margin: 0; color: var(--accent-color); font-size: 0.9rem;">Toronto & Vancouver</p>
+                </div>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-body);">Service to Toronto, Vancouver, and other major
+                Canadian cities with full customs clearance support.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Air
+                    Freight</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Express</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Customs</span>
+            </div>
+        </div>
+
+        <!-- Qatar -->
+        <div class="destination-card" style="cursor: pointer;" onclick="openDestinationModal('Qatar')">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 3.5rem;">🇶🇦</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.6rem;">Qatar</h3>
+                    <p style="margin: 0; color: var(--accent-color); font-size: 0.9rem;">Doha Direct</p>
+                </div>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-body);">Specialized handling for Qatar with direct flights
+                from Karachi. 1-3 day transit times available.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Air
+                    Cargo</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Express</span>
+                <span
+                    style="background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">Commercial</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="margin-top: 4rem; text-align: center; padding: 3rem; background: var(--bg-light); border-radius: 12px;">
+        <h2 style="margin-bottom: 1rem;">Don't See Your Destination?</h2>
+        <p
+            style="color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            We can arrange shipments to many other international destinations. Contact us for a custom quote.
+        </p>
+        <a href="{{ url_for('contact') }}" class="btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem;">Contact
+            Us</a>
+    </div>
+</div>
+
+<!-- Destination Modal -->
+<div id="destModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeDestModal()">&times;</span>
+        <h2 id="dest-modal-title" style="color: var(--primary-color); margin-bottom: 1.5rem;">Destination</h2>
+        <p id="dest-modal-content" style="color: var(--text-body); line-height: 1.8; margin-bottom: 2rem;"></p>
+        <div style="display: flex; gap: 1rem;">
+            <a href="{{ url_for('contact') }}" class="btn-primary" style="flex: 1; text-align: center;">Get a Quote</a>
+            <a href="{{ url_for('tracking') }}" class="btn-primary"
+                style="flex: 1; text-align: center; background: transparent; color: var(--primary-color) !important; border: 1px solid var(--primary-color);">Track
+                Shipment</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const destinationInfo = {
+        'UK': {
+            title: 'United Kingdom',
+            content: 'Our primary European hub with daily flights from Pakistan. We offer comprehensive customs clearance support and door-to-door delivery services. Transit time: 3-5 business days. Routes via Dubai (DXB) to London Heathrow (LHR) and other major UK cities.'
+        },
+        'USA': {
+            title: 'United States',
+            content: 'Direct and connecting flights to major US cities including New York (JFK), Los Angeles (LAX), and Chicago (ORD). Full customs brokerage services included. Transit time: 5-7 business days. We handle both air and sea freight options.'
+        },
+        'UAE': {
+            title: 'UAE / Dubai',
+            content: 'Fastest route with next-day delivery options available. Direct flights from Lahore and Karachi to Dubai. Local warehousing facilities for storage and consolidation. Transit time: 1-2 business days. Perfect for urgent shipments.'
+        },
+        'KSA': {
+            title: 'Saudi Arabia',
+            content: 'Reliable service to Riyadh, Jeddah, Dammam, and other major Saudi cities. Routes via Dubai with efficient customs clearance. Transit time: 2-4 business days. Specialized handling for commercial and personal shipments.'
+        },
+        'Canada': {
+            title: 'Canada',
+            content: 'Service to Toronto (YYZ), Vancouver (YVR), and other major Canadian cities. Routes via London with full customs clearance support. Transit time: 5-7 business days. Expert handling of Canadian import regulations.'
+        },
+        'Qatar': {
+            title: 'Qatar',
+            content: 'Specialized handling for Qatar with direct flights from Karachi to Doha (DOH). Fast and reliable service for both commercial and personal shipments. Transit time: 1-3 business days. Ideal for Gulf region deliveries.'
+        }
+    };
+
+    function openDestinationModal(dest) {
+        const modal = document.getElementById('destModal');
+        const info = destinationInfo[dest];
+        if (info) {
+            document.getElementById('dest-modal-title').innerText = info.title;
+            document.getElementById('dest-modal-content').innerText = info.content;
+            modal.style.display = 'block';
+        }
+    }
+
+    function closeDestModal() {
+        document.getElementById('destModal').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        const modal = document.getElementById('destModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}
