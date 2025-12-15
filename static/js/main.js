@@ -203,6 +203,26 @@ function initThreeJS() {
             hitbox.userData = dest;
             markers.push(hitbox);
             globeGroup.add(hitbox);
+
+            // --- Country Name Labels ---
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 256;
+            canvas.height = 64;
+            context.font = "Bold 24px Arial";
+            context.fillStyle = "rgba(255,255,255,1.0)";
+            context.textAlign = "center";
+            context.shadowColor = "rgba(0,0,0,0.8)";
+            context.shadowBlur = 4;
+            context.fillText(dest.name, 128, 32);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+            const sprite = new THREE.Sprite(spriteMat);
+            sprite.position.copy(pos.clone().multiplyScalar(1.1)); // Reduced offset to be closer
+            sprite.scale.set(3, 0.75, 1); // Adjusted scale
+            globeGroup.add(sprite);
+
         });
 
         // Routes
