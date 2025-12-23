@@ -3,45 +3,44 @@
 {% block title %}Track Your Shipment - International Cargo{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
-    <h1 style="text-align: center; margin-bottom: 1rem;">Track Your Shipment</h1>
-    <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Enter your tracking ID and select your
-        courier to track your shipment</p>
-
-    <div class="tracking-card"
-        style="background: #FFFFFF; padding: 3rem; border-radius: 12px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
-
-        <div style="margin-bottom: 1.5rem;">
-            <label for="tracking-id"
-                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-main);">Tracking
-                ID</label>
-            <input type="text" id="tracking-id" placeholder="Enter your tracking number"
-                style="width: 100%; padding: 1rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 6px;">
+<div class="tracking-container">
+    <div class="container" style="padding: 2.5rem 1.5rem;">
+        <div class="tracking-header">
+            <h1>Track Shipment</h1>
+            <p>Enter your ID for real-time status.</p>
         </div>
 
-        <div style="margin-bottom: 2rem;">
-            <label for="courier-select"
-                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-main);">Select
-                Courier</label>
-            <select id="courier-select"
-                style="width: 100%; padding: 1rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 6px; background: white; cursor: pointer;">
-                <option value="">-- Select Courier --</option>
-                <option value="dhl">DHL Express</option>
-                <option value="ups">UPS</option>
-                <option value="fedex">FedEx</option>
-            </select>
-        </div>
+        <div class="tracking-card">
+            <div style="width: 100%; text-align: left; margin-bottom: 1.2rem;">
+                <label for="tracking-id"
+                    style="display: block; margin-bottom: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; font-size: 0.72rem;">Tracking
+                    ID</label>
+                <input type="text" id="tracking-id" placeholder="ID Number"
+                    style="width: 100%; padding: 0.8rem; border: 1px solid var(--border-apple); border-radius: 10px; background: rgba(255, 255, 255, 0.01); color: #fff; outline: none; font-size: 0.85rem;">
+            </div>
 
-        <button onclick="trackShipment()" class="btn-primary"
-            style="width: 100%; padding: 1rem; font-size: 1.1rem;">Track Shipment</button>
+            <div style="width: 100%; text-align: left; margin-bottom: 1.8rem;">
+                <label for="courier-select"
+                    style="display: block; margin-bottom: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; font-size: 0.72rem;">Courier</label>
+                <select id="courier-select"
+                    style="width: 100%; padding: 0.8rem; border: 1px solid var(--border-apple); border-radius: 10px; background: rgba(255, 255, 255, 0.01); color: #fff; cursor: pointer; outline: none; font-size: 0.85rem;">
+                    <option value="" style="background: #000;">Select Courier</option>
+                    <option value="dhl" style="background: #000;">DHL Express</option>
+                    <option value="ups" style="background: #000;">UPS</option>
+                    <option value="fedex" style="background: #000;">FedEx</option>
+                </select>
+            </div>
 
-        <!-- Info Note -->
-        <div
-            style="margin-top: 2rem; padding: 1rem; background: var(--bg-light); border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <p style="font-size: 0.9rem; color: var(--text-body); margin: 0;">
-                <strong>Note:</strong> For shipments currently being handled in UK/Dubai, please contact our support
-                team for updates.
-            </p>
+            <button onclick="trackShipment()" class="btn-primary"
+                style="width: 100%; padding: 0.8rem; font-size: 0.85rem;">Track Shipment</button>
+
+            <div
+                style="margin-top: 1.8rem; padding: 0.8rem; background: rgba(255, 255, 255, 0.01); border-radius: 8px; border: 1px solid var(--border-apple);">
+                <p style="font-size: 0.7rem; color: var(--text-muted); margin: 0; line-height: 1.3;">
+                    <span style="color: var(--primary-color);">Note:</span> For UK/Dubai handling, contact priority
+                    support.
+                </p>
+            </div>
         </div>
     </div>
 </div>

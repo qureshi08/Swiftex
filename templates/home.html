@@ -2,18 +2,26 @@
 
 {% block title %}International Cargo & Courier Services from Pakistan{% endblock %}
 
+{% block extra_bg %}
+<div class="energy-blob"></div>
+{% endblock %}
+
 {% block content %}
 <section id="hero">
     <div class="hero-split-container">
         <!-- Left Side: Text Content -->
         <div class="hero-text-side">
             <div class="hero-content">
-                <h1>Fast & Reliable<br>International Cargo</h1>
-                <p>Trusted logistics partner for shipping from Pakistan to UK, USA, UAE, Canada, and beyond.
-                    Professional cargo services with real-time tracking and competitive rates.</p>
+                <h1
+                    style="font-size: 3.2rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 1.2rem;">
+                    Precision in<br>Global Cargo.</h1>
+                <p
+                    style="font-size: 1.15rem; color: var(--text-body); max-width: 440px; margin-bottom: 2rem; line-height: 1.45;">
+                    The standard for shipping from Pakistan to the world. Fast, secure, and perfectly timed.
+                </p>
                 <div class="hero-buttons">
                     <a href="{{ url_for('contact') }}" class="btn-primary">Get a Quote</a>
-                    <a href="{{ url_for('tracking') }}" class="btn-primary btn-outline">Track Shipment</a>
+                    <a href="{{ url_for('tracking') }}" class="btn-outline">Track Shipment</a>
                 </div>
             </div>
         </div>
@@ -37,38 +45,37 @@
 <div id="destinationModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
-        <h2 id="modal-country-name" style="color: var(--primary-color); margin-bottom: 0.85rem;">Country Name</h2>
+        <h2 id="modal-country-name"
+            style="color: var(--text-main); font-weight: 600; margin-bottom: 1.2rem; font-size: 1.8rem; letter-spacing: -0.02em;">
+            Country Name</h2>
 
-        <div style="margin-bottom: 1.25rem;">
+        <div style="margin-bottom: 1.5rem;">
             <h4
-                style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem;">
+                style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; font-weight: 600;">
                 Services Offered</h4>
-            <p id="modal-services" style="color: var(--text-body); line-height: 1.6; font-size: 0.9rem;">Air Freight,
-                Express Cargo,
-                Door-to-Door Delivery</p>
+            <p id="modal-services" style="color: var(--text-body); line-height: 1.5; font-size: 1rem;">Air Freight,
+                Express Cargo, Door-to-Door Delivery</p>
         </div>
 
-        <div style="margin-bottom: 1.25rem;">
+        <div style="margin-bottom: 1.5rem;">
             <h4
-                style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem;">
+                style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; font-weight: 600;">
                 Typical Routing</h4>
             <p id="modal-routing"
-                style="color: var(--text-body); font-family: 'Courier New', monospace; background: var(--bg-light); padding: 0.45rem; border-radius: 4px; font-size: 0.85rem;">
+                style="color: var(--text-body); font-size: 1rem; border-left: 2px solid var(--primary-color); padding-left: 0.8rem; margin: 0.5rem 0;">
                 LHE → DXB → Destination</p>
         </div>
 
-        <div style="margin-bottom: 0.85rem;">
+        <div style="margin-bottom: 2rem;">
             <h4
-                style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem;">
+                style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; font-weight: 600;">
                 Transit Time</h4>
-            <p id="modal-transit" style="color: var(--text-body); font-size: 0.9rem;">3-5 business days</p>
+            <p id="modal-transit" style="color: var(--text-body); font-size: 1rem;">3-5 business days</p>
         </div>
 
-        <div style="margin-top: 1.75rem; display: flex; gap: 0.85rem;">
-            <a href="{{ url_for('contact') }}" class="btn-primary" style="flex: 1; text-align: center;">Get a Quote</a>
-            <a href="{{ url_for('tracking') }}" class="btn-primary"
-                style="flex: 1; text-align: center; background: transparent; color: var(--primary-color) !important; border: 1px solid var(--primary-color); box-shadow: none;">Track
-                Shipment</a>
+        <div style="display: flex; gap: 1rem;">
+            <a href="{{ url_for('contact') }}" class="btn-primary" style="flex: 1;">Get a Quote</a>
+            <a href="{{ url_for('tracking') }}" class="btn-outline" style="flex: 1;">Track Shipment</a>
         </div>
     </div>
 </div>

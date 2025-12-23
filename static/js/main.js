@@ -62,16 +62,7 @@ function initThreeJS() {
         const globe = new THREE.Mesh(sphereGeo, material);
         globeGroup.add(globe);
 
-        // Atmosphere
-        const atmosGeo = new THREE.SphereGeometry(6.25, 64, 64);
-        const atmosMat = new THREE.MeshBasicMaterial({
-            color: 0x2DBE60,  // UPDATED ACCENT GREEN
-            transparent: true,
-            opacity: 0.12,
-            side: THREE.BackSide
-        });
-        const atmos = new THREE.Mesh(atmosGeo, atmosMat);
-        globeGroup.add(atmos);
+
 
         // Lighting
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
@@ -174,8 +165,9 @@ function initThreeJS() {
         }
 
         const markers = [];
+        const animatedPlanes = []; // Array to store plane objects
         const markerGeo = new THREE.SphereGeometry(0.15, 16, 16);
-        const originMat = new THREE.MeshBasicMaterial({ color: 0x2DBE60 }); // Accent Green
+        const originMat = new THREE.MeshBasicMaterial({ color: 0xFFFFFF }); // Changed to white
         const destMat = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
         const pakistanPos = latLongToVector3(30.37, 69.34, 6);
 
@@ -186,19 +178,7 @@ function initThreeJS() {
             marker.userData = dest;
             globeGroup.add(marker);
 
-            if (dest.isOrigin) {
-                const ringGeo = new THREE.RingGeometry(0.25, 0.35, 32);
-                const ringMat = new THREE.MeshBasicMaterial({
-                    color: 0x2DBE60, // Accent Green
-                    side: THREE.DoubleSide,
-                    transparent: true,
-                    opacity: 0.6
-                });
-                const ring = new THREE.Mesh(ringGeo, ringMat);
-                ring.position.copy(pos);
-                ring.lookAt(new THREE.Vector3(0, 0, 0));
-                globeGroup.add(ring);
-            }
+
 
             const hitbox = new THREE.Mesh(
                 new THREE.SphereGeometry(0.5, 8, 8),
@@ -235,20 +215,73 @@ function initThreeJS() {
             if (dest.isOrigin) return;
             const targetPos = latLongToVector3(dest.lat, dest.lon, 6);
             const dist = pakistanPos.distanceTo(targetPos);
-            // Dynamic altitude: Lowered to be closer to surface but safely clear it
             const altitude = 5.2 + (dist * 0.55);
             const mid = pakistanPos.clone().add(targetPos).normalize().multiplyScalar(altitude);
             const curve = new THREE.QuadraticBezierCurve3(pakistanPos, mid, targetPos);
-            const geometry = new THREE.TubeGeometry(curve, 50, 0.02, 8, false);
-            const material = new THREE.MeshBasicMaterial({
-                color: 0x2DBE60, // Accent Green
+
+            // Dotted Route Line
+            const points = curve.getPoints(50);
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const material = new THREE.LineDashedMaterial({
+                color: 0x2DBE60,
+                dashSize: 0.2,
+                gapSize: 0.1,
                 transparent: true,
-                opacity: 0.8
+                opacity: 0.4
             });
-            const routeLine = new THREE.Mesh(geometry, material);
+            const routeLine = new THREE.Line(geometry, material);
+            routeLine.computeLineDistances();
             routeLine.userData = { isRoute: true, target: dest.name };
             globeGroup.add(routeLine);
             dest.routeMesh = routeLine;
+
+            // --- 3D Animated Plane (Custom Shape) ---
+            const planeShape = new THREE.Shape();
+            planeShape.moveTo(20, 0);
+            planeShape.lineTo(15, -2);
+            planeShape.lineTo(15, -10);
+            planeShape.lineTo(12, -10);
+            planeShape.lineTo(12, -2);
+            planeShape.lineTo(5, -2);
+            planeShape.lineTo(3, -5);
+            planeShape.lineTo(0, -5);
+            planeShape.lineTo(2, 0);
+            planeShape.lineTo(0, 5);
+            planeShape.lineTo(3, 5);
+            planeShape.lineTo(5, 2);
+            planeShape.lineTo(12, 2);
+            planeShape.lineTo(12, 10);
+            planeShape.lineTo(15, 10);
+            planeShape.lineTo(15, 2);
+            planeShape.lineTo(20, 0);
+
+            const extrudeSettings = { depth: 1.5, bevelEnabled: false };
+            const planeGeo = new THREE.ExtrudeGeometry(planeShape, extrudeSettings);
+
+            planeGeo.center();
+            planeGeo.scale(0.025, 0.025, 0.025);
+
+            // Orientation Corrected
+            planeGeo.rotateZ(-Math.PI / 2);
+            planeGeo.rotateX(-Math.PI / 2);
+
+            const planeMat = new THREE.MeshPhongMaterial({
+                color: 0xFFFFFF,
+                emissive: 0x2DBE60,
+                emissiveIntensity: 0.5,
+                side: THREE.DoubleSide,
+                flatShading: true,
+                shininess: 0
+            });
+            const plane = new THREE.Mesh(planeGeo, planeMat);
+            globeGroup.add(plane);
+
+            // Store for animation
+            animatedPlanes.push({
+                mesh: plane,
+                curve: curve,
+                t: Math.random() // Random start position
+            });
         });
 
         let isDragging = false;
@@ -300,8 +333,8 @@ function initThreeJS() {
             // Default Route State: Semi-visible
             globeGroup.children.forEach(child => {
                 if (child.userData.isRoute) {
-                    child.material.opacity = 0.8;
-                    child.material.color.setHex(0x2DBE60); // Accent Green
+                    child.material.opacity = 0.4;
+                    child.material.color.setHex(0x00FFAA); // Electric Cyan
                 }
             });
 
@@ -314,7 +347,7 @@ function initThreeJS() {
                     // Highlight specific route if hovering destination
                     if (!data.isOrigin && data.routeMesh) {
                         data.routeMesh.material.opacity = 1.0;
-                        data.routeMesh.material.color.setHex(0x34E075); // Lighter Green Highlight
+                        data.routeMesh.material.color.setHex(0x50FF90); // Brighter green highlight
                     }
                     if (tooltip) {
                         tooltip.style.display = 'block';
@@ -387,12 +420,15 @@ function initThreeJS() {
 
         function onTouchMove(e) {
             if (isDragging && e.touches.length === 1) {
+                // Prevent scrolling while interacting with globe
+                if (e.cancelable) e.preventDefault();
+
                 const deltaMove = {
                     x: e.touches[0].clientX - previousMousePosition.x,
                     y: e.touches[0].clientY - previousMousePosition.y
                 };
-                targetRotation.y += deltaMove.x * 0.005;
-                targetRotation.x += deltaMove.y * 0.005;
+                targetRotation.y += deltaMove.x * 0.008; // Slightly more sensitive for mobile
+                targetRotation.x += deltaMove.y * 0.008;
                 previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
             }
         }
@@ -401,9 +437,10 @@ function initThreeJS() {
             isDragging = false;
         }
 
+        canvasContainer.addEventListener('touchstart', onTouchStart, { passive: false });
+        canvasContainer.addEventListener('touchmove', onTouchMove, { passive: false });
         canvasContainer.addEventListener('touchend', onTouchEnd);
         canvasContainer.addEventListener('wheel', onMouseWheel, { passive: false });
-        canvasContainer.addEventListener('touchend', onTouchEnd);
 
         // RESET BUTTON REMOVED PER REQ
         // MOUSE WHEEL ZOOM REMOVED PER REQ
@@ -415,6 +452,38 @@ function initThreeJS() {
             if (!isDragging) targetRotation.y += 0.001;
             globeGroup.rotation.x = currentRotation.x;
             globeGroup.rotation.y = currentRotation.y;
+
+            // Animate Planes
+            animatedPlanes.forEach(planeObj => {
+                planeObj.t += 0.003; // Speed
+                if (planeObj.t > 1) planeObj.t = 0;
+
+                const point = planeObj.curve.getPoint(planeObj.t);
+                planeObj.mesh.position.copy(point);
+
+                // --- Stable Orientation Logic ---
+                // Tangent: direction of travel
+                const tangent = planeObj.curve.getTangentAt(planeObj.t).normalize();
+                // Up: Radial vector out from center (normal to the sphere surface)
+                const up = point.clone().normalize();
+                // Right: perpendicular to tangent and up
+                const right = new THREE.Vector3().crossVectors(tangent, up).normalize();
+                // Orthonormal Tangent: ensure forward is perfectly perpendicular to up and right
+                const stableTangent = new THREE.Vector3().crossVectors(up, right).normalize();
+
+                // Construct a matrix to set the orientation exactly
+                // Column 0: Right, Column 1: Up, Column 2: Forward (Tangent)
+                const matrix = new THREE.Matrix4();
+                matrix.set(
+                    right.x, up.x, stableTangent.x, 0,
+                    right.y, up.y, stableTangent.y, 0,
+                    right.z, up.z, stableTangent.z, 0,
+                    0, 0, 0, 1
+                );
+
+                planeObj.mesh.quaternion.setFromRotationMatrix(matrix);
+            });
+
             renderer.render(scene, camera);
         }
 
