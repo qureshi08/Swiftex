@@ -712,13 +712,12 @@ textarea:hover {
     }
 
     #hero {
-        padding: 3rem 1.2rem;
-        /* Symmetric vertical padding for true centering */
+        padding: 10rem 1.2rem 4rem;
         height: auto;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         text-align: center;
         width: 100%;
