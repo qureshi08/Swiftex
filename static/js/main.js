@@ -466,15 +466,14 @@ function initThreeJS() {
                 const point = planeObj.curve.getPoint(planeObj.t);
                 planeObj.mesh.position.copy(point);
 
-                // --- Improved Linear Orientation (C130 Alignment) ---
+                // --- Improved Linear Orientation ---
                 const tangent = planeObj.curve.getTangentAt(planeObj.t).normalize();
                 const up = point.clone().normalize(); // Normal to globe
                 const right = new THREE.Vector3().crossVectors(up, tangent).normalize();
                 const forward = new THREE.Vector3().crossVectors(right, up).normalize();
 
                 const matrix = new THREE.Matrix4();
-                // basis: Right (X), Up (Y), Forward (Z)
-                matrix.makeBasis(right, up, forward);
+                matrix.makeBasis(right, up, forward.negate()); // Negate forward if needed based on geo
                 planeObj.mesh.quaternion.setFromRotationMatrix(matrix);
             });
 

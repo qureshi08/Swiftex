@@ -809,10 +809,11 @@ textarea:hover {
     }
 
     .footer-grid {
-        flex-direction: column;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.5rem;
         text-align: center;
-        align-items: center;
+        justify-items: center;
     }
 
     /* Pro-Mini Cards for Mobile */
