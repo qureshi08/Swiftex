@@ -712,8 +712,8 @@ textarea:hover {
     }
 
     #hero {
-        padding: 0 1.2rem;
-        /* No top/bottom padding bias for perfect centering */
+        padding: 3rem 1.2rem;
+        /* Symmetric vertical padding for true centering */
         height: auto;
         min-height: 100vh;
         display: flex;
