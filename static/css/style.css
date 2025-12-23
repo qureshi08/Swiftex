@@ -712,8 +712,8 @@ textarea:hover {
     }
 
     #hero {
-        padding: 0.5rem 1.2rem 8rem;
-        /* Dramatically increased bottom padding to push content higher */
+        padding: 0 1.2rem 12rem;
+        /* Even more bottom padding to push content as high as possible */
         height: auto;
         min-height: 100vh;
         display: flex;
@@ -790,19 +790,18 @@ textarea:hover {
 
     .hero-visual-side {
         width: 100% !important;
-        height: 280px !important;
-        /* Increased from 220px */
+        height: 350px !important;
+        /* Maximized for impact */
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
     }
 
     #hero-canvas-container {
-        width: 260px !important;
-        /* Increased from 200px */
-        height: 260px !important;
-        /* Increased from 200px */
+        width: 320px !important;
+        /* Ultra-large globe */
+        height: 320px !important;
     }
 
     .container {
