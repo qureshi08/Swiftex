@@ -237,33 +237,38 @@ function initThreeJS() {
 
             // --- 3D Animated Plane (Custom Shape) ---
             const planeShape = new THREE.Shape();
-            planeShape.moveTo(20, 0);
-            planeShape.lineTo(15, -2);
-            planeShape.lineTo(15, -10);
-            planeShape.lineTo(12, -10);
-            planeShape.lineTo(12, -2);
-            planeShape.lineTo(5, -2);
-            planeShape.lineTo(3, -5);
-            planeShape.lineTo(0, -5);
-            planeShape.lineTo(2, 0);
-            planeShape.lineTo(0, 5);
-            planeShape.lineTo(3, 5);
-            planeShape.lineTo(5, 2);
-            planeShape.lineTo(12, 2);
-            planeShape.lineTo(12, 10);
-            planeShape.lineTo(15, 10);
-            planeShape.lineTo(15, 2);
-            planeShape.lineTo(20, 0);
+            // C130 Cargo Plane Silhouette (Straight Wings, Heavy Body)
+            planeShape.moveTo(0, 12); // Nose
+            planeShape.lineTo(2, 10); // Nose taper
+            planeShape.lineTo(2.5, 4); // Forward body
+            planeShape.lineTo(15, 4); // Wing front (Straight)
+            planeShape.lineTo(15, -2); // Wing tip
+            planeShape.lineTo(2.5, -2); // Wing back
+            planeShape.lineTo(2.5, -10); // Aft body
+            planeShape.lineTo(7, -10); // Horizontal stabilizer front
+            planeShape.lineTo(7, -13); // Horizontal stabilizer tip
+            planeShape.lineTo(2, -13); // Horizontal stabilizer back
+            planeShape.lineTo(0, -15); // Tail end
+            planeShape.lineTo(-2, -13);
+            planeShape.lineTo(-7, -13);
+            planeShape.lineTo(-7, -10);
+            planeShape.lineTo(-2.5, -10);
+            planeShape.lineTo(-2.5, -2);
+            planeShape.lineTo(-15, -2);
+            planeShape.lineTo(-15, 4);
+            planeShape.lineTo(-2.5, 4);
+            planeShape.lineTo(-2.5, 10);
+            planeShape.lineTo(0, 12);
 
             const extrudeSettings = { depth: 1.5, bevelEnabled: false };
             const planeGeo = new THREE.ExtrudeGeometry(planeShape, extrudeSettings);
 
             planeGeo.center();
-            planeGeo.scale(0.025, 0.025, 0.025);
+            planeGeo.scale(0.018, 0.018, 0.018); // Slightly smaller scale for C130 body
 
-            // Orientation Corrected
-            planeGeo.rotateZ(-Math.PI / 2);
-            planeGeo.rotateX(-Math.PI / 2);
+            // Orientation Corrected: C130 shape is vertically oriented in 2D, 
+            // after extrusion it faces Z, but we need it to face the direction of the tangent.
+            planeGeo.rotateX(Math.PI / 2); // Lay it flat on XY plane relative to its coordinate system
 
             const planeMat = new THREE.MeshPhongMaterial({
                 color: 0xFFFFFF,
@@ -461,26 +466,15 @@ function initThreeJS() {
                 const point = planeObj.curve.getPoint(planeObj.t);
                 planeObj.mesh.position.copy(point);
 
-                // --- Stable Orientation Logic ---
-                // Tangent: direction of travel
+                // --- Improved Linear Orientation (C130 Alignment) ---
                 const tangent = planeObj.curve.getTangentAt(planeObj.t).normalize();
-                // Up: Radial vector out from center (normal to the sphere surface)
-                const up = point.clone().normalize();
-                // Right: perpendicular to tangent and up
-                const right = new THREE.Vector3().crossVectors(tangent, up).normalize();
-                // Orthonormal Tangent: ensure forward is perfectly perpendicular to up and right
-                const stableTangent = new THREE.Vector3().crossVectors(up, right).normalize();
+                const up = point.clone().normalize(); // Normal to globe
+                const right = new THREE.Vector3().crossVectors(up, tangent).normalize();
+                const forward = new THREE.Vector3().crossVectors(right, up).normalize();
 
-                // Construct a matrix to set the orientation exactly
-                // Column 0: Right, Column 1: Up, Column 2: Forward (Tangent)
                 const matrix = new THREE.Matrix4();
-                matrix.set(
-                    right.x, up.x, stableTangent.x, 0,
-                    right.y, up.y, stableTangent.y, 0,
-                    right.z, up.z, stableTangent.z, 0,
-                    0, 0, 0, 1
-                );
-
+                // basis: Right (X), Up (Y), Forward (Z)
+                matrix.makeBasis(right, up, forward);
                 planeObj.mesh.quaternion.setFromRotationMatrix(matrix);
             });
 
